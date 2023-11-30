@@ -1,15 +1,6 @@
-# example
+# github-actions-libsonnet
 
-Jsonnet library for example
-## Install
+Jsonnet library for github-actions-libsonnet
 
-```
-jb install github.com/example/example@master
-```
-
-## Usage
-
-```jsonnet
-local example = import "github.com/example/example/main.libsonnet"
-```
-
+> [!CAUTION]
+> Incomplete library, very experimental
