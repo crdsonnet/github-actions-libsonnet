@@ -22,10 +22,8 @@ fmt:
 .PHONY: docs
 docs: jsonnetfile.json
 	@rm -rf docs/
-	@jb install github.com/jsonnet-libs/docsonnet/doc-util
 	@$(JSONNET_BIN) \
-		-J vendor \
-		-J lib \
+		-J generator/vendor \
 		-S -c -m docs \
 		-e '(import "github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet").render(import "main.libsonnet")'
 
