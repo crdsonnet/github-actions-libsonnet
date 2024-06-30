@@ -206,23 +206,20 @@
     * [`fn withWorkflows(value)`](#fn-onworkflow_runwithworkflows)
     * [`fn withWorkflowsMixin(value)`](#fn-onworkflow_runwithworkflowsmixin)
 * [`obj permissions`](#obj-permissions)
-  * [`fn withPermissionsEvent(value)`](#fn-permissionswithpermissionsevent)
-  * [`fn withPermissionsEventMixin(value)`](#fn-permissionswithpermissionseventmixin)
-  * [`obj permissions-event`](#obj-permissionspermissions-event)
-    * [`fn withActions(value)`](#fn-permissionspermissions-eventwithactions)
-    * [`fn withAttestations(value)`](#fn-permissionspermissions-eventwithattestations)
-    * [`fn withChecks(value)`](#fn-permissionspermissions-eventwithchecks)
-    * [`fn withContents(value)`](#fn-permissionspermissions-eventwithcontents)
-    * [`fn withDeployments(value)`](#fn-permissionspermissions-eventwithdeployments)
-    * [`fn withDiscussions(value)`](#fn-permissionspermissions-eventwithdiscussions)
-    * [`fn withIdToken(value)`](#fn-permissionspermissions-eventwithidtoken)
-    * [`fn withIssues(value)`](#fn-permissionspermissions-eventwithissues)
-    * [`fn withPackages(value)`](#fn-permissionspermissions-eventwithpackages)
-    * [`fn withPages(value)`](#fn-permissionspermissions-eventwithpages)
-    * [`fn withPullRequests(value)`](#fn-permissionspermissions-eventwithpullrequests)
-    * [`fn withRepositoryProjects(value)`](#fn-permissionspermissions-eventwithrepositoryprojects)
-    * [`fn withSecurityEvents(value)`](#fn-permissionspermissions-eventwithsecurityevents)
-    * [`fn withStatuses(value)`](#fn-permissionspermissions-eventwithstatuses)
+  * [`fn withActions(value)`](#fn-permissionswithactions)
+  * [`fn withAttestations(value)`](#fn-permissionswithattestations)
+  * [`fn withChecks(value)`](#fn-permissionswithchecks)
+  * [`fn withContents(value)`](#fn-permissionswithcontents)
+  * [`fn withDeployments(value)`](#fn-permissionswithdeployments)
+  * [`fn withDiscussions(value)`](#fn-permissionswithdiscussions)
+  * [`fn withIdToken(value)`](#fn-permissionswithidtoken)
+  * [`fn withIssues(value)`](#fn-permissionswithissues)
+  * [`fn withPackages(value)`](#fn-permissionswithpackages)
+  * [`fn withPages(value)`](#fn-permissionswithpages)
+  * [`fn withPullRequests(value)`](#fn-permissionswithpullrequests)
+  * [`fn withRepositoryProjects(value)`](#fn-permissionswithrepositoryprojects)
+  * [`fn withSecurityEvents(value)`](#fn-permissionswithsecurityevents)
+  * [`fn withStatuses(value)`](#fn-permissionswithstatuses)
 
 ## Fields
 
@@ -2577,35 +2574,10 @@ PARAMETERS:
 ### obj permissions
 
 
-#### fn permissions.withPermissionsEvent
+#### fn permissions.withActions
 
 ```jsonnet
-permissions.withPermissionsEvent(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### fn permissions.withPermissionsEventMixin
-
-```jsonnet
-permissions.withPermissionsEventMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### obj permissions.permissions-event
-
-
-##### fn permissions.permissions-event.withActions
-
-```jsonnet
-permissions.permissions-event.withActions(value)
+permissions.withActions(value)
 ```
 
 PARAMETERS:
@@ -2614,10 +2586,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withAttestations
+#### fn permissions.withAttestations
 
 ```jsonnet
-permissions.permissions-event.withAttestations(value)
+permissions.withAttestations(value)
 ```
 
 PARAMETERS:
@@ -2626,10 +2598,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withChecks
+#### fn permissions.withChecks
 
 ```jsonnet
-permissions.permissions-event.withChecks(value)
+permissions.withChecks(value)
 ```
 
 PARAMETERS:
@@ -2638,10 +2610,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withContents
+#### fn permissions.withContents
 
 ```jsonnet
-permissions.permissions-event.withContents(value)
+permissions.withContents(value)
 ```
 
 PARAMETERS:
@@ -2650,10 +2622,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withDeployments
+#### fn permissions.withDeployments
 
 ```jsonnet
-permissions.permissions-event.withDeployments(value)
+permissions.withDeployments(value)
 ```
 
 PARAMETERS:
@@ -2662,10 +2634,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withDiscussions
+#### fn permissions.withDiscussions
 
 ```jsonnet
-permissions.permissions-event.withDiscussions(value)
+permissions.withDiscussions(value)
 ```
 
 PARAMETERS:
@@ -2674,10 +2646,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withIdToken
+#### fn permissions.withIdToken
 
 ```jsonnet
-permissions.permissions-event.withIdToken(value)
+permissions.withIdToken(value)
 ```
 
 PARAMETERS:
@@ -2686,10 +2658,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withIssues
+#### fn permissions.withIssues
 
 ```jsonnet
-permissions.permissions-event.withIssues(value)
+permissions.withIssues(value)
 ```
 
 PARAMETERS:
@@ -2698,10 +2670,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withPackages
+#### fn permissions.withPackages
 
 ```jsonnet
-permissions.permissions-event.withPackages(value)
+permissions.withPackages(value)
 ```
 
 PARAMETERS:
@@ -2710,10 +2682,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withPages
+#### fn permissions.withPages
 
 ```jsonnet
-permissions.permissions-event.withPages(value)
+permissions.withPages(value)
 ```
 
 PARAMETERS:
@@ -2722,10 +2694,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withPullRequests
+#### fn permissions.withPullRequests
 
 ```jsonnet
-permissions.permissions-event.withPullRequests(value)
+permissions.withPullRequests(value)
 ```
 
 PARAMETERS:
@@ -2734,10 +2706,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withRepositoryProjects
+#### fn permissions.withRepositoryProjects
 
 ```jsonnet
-permissions.permissions-event.withRepositoryProjects(value)
+permissions.withRepositoryProjects(value)
 ```
 
 PARAMETERS:
@@ -2746,10 +2718,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withSecurityEvents
+#### fn permissions.withSecurityEvents
 
 ```jsonnet
-permissions.permissions-event.withSecurityEvents(value)
+permissions.withSecurityEvents(value)
 ```
 
 PARAMETERS:
@@ -2758,10 +2730,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withStatuses
+#### fn permissions.withStatuses
 
 ```jsonnet
-permissions.permissions-event.withStatuses(value)
+permissions.withStatuses(value)
 ```
 
 PARAMETERS:

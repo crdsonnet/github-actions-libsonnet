@@ -11,7 +11,6 @@
 * [`fn withConcurrency(value)`](#fn-withconcurrency)
 * [`fn withConcurrencyMixin(value)`](#fn-withconcurrencymixin)
 * [`fn withContainer(value)`](#fn-withcontainer)
-* [`fn withContainerMixin(value)`](#fn-withcontainermixin)
 * [`fn withContinueOnError(value)`](#fn-withcontinueonerror)
 * [`fn withContinueOnErrorMixin(value)`](#fn-withcontinueonerrormixin)
 * [`fn withDefaults(value)`](#fn-withdefaults)
@@ -47,25 +46,6 @@
     * [`fn withGroup(value)`](#fn-concurrencyconcurrencywithgroup)
     * [`obj cancel-in-progress`](#obj-concurrencyconcurrencycancel-in-progress)
       * [`fn withExpressionSyntax(value)`](#fn-concurrencyconcurrencycancel-in-progresswithexpressionsyntax)
-* [`obj container`](#obj-container)
-  * [`fn withContainer(value)`](#fn-containerwithcontainer)
-  * [`fn withContainerMixin(value)`](#fn-containerwithcontainermixin)
-  * [`obj container`](#obj-containercontainer)
-    * [`fn withCredentials(value)`](#fn-containercontainerwithcredentials)
-    * [`fn withCredentialsMixin(value)`](#fn-containercontainerwithcredentialsmixin)
-    * [`fn withEnv(value)`](#fn-containercontainerwithenv)
-    * [`fn withEnvMixin(value)`](#fn-containercontainerwithenvmixin)
-    * [`fn withImage(value)`](#fn-containercontainerwithimage)
-    * [`fn withOptions(value)`](#fn-containercontainerwithoptions)
-    * [`fn withPorts(value)`](#fn-containercontainerwithports)
-    * [`fn withPortsMixin(value)`](#fn-containercontainerwithportsmixin)
-    * [`fn withVolumes(value)`](#fn-containercontainerwithvolumes)
-    * [`fn withVolumesMixin(value)`](#fn-containercontainerwithvolumesmixin)
-    * [`obj credentials`](#obj-containercontainercredentials)
-      * [`fn withPassword(value)`](#fn-containercontainercredentialswithpassword)
-      * [`fn withUsername(value)`](#fn-containercontainercredentialswithusername)
-    * [`obj env`](#obj-containercontainerenv)
-      * [`fn withStringContainingExpressionSyntax(value)`](#fn-containercontainerenvwithstringcontainingexpressionsyntax)
 * [`obj continue-on-error`](#obj-continue-on-error)
   * [`fn withExpressionSyntax(value)`](#fn-continue-on-errorwithexpressionsyntax)
 * [`obj defaults`](#obj-defaults)
@@ -86,23 +66,20 @@
 * [`obj needs`](#obj-needs)
   * [`fn withName(value)`](#fn-needswithname)
 * [`obj permissions`](#obj-permissions)
-  * [`fn withPermissionsEvent(value)`](#fn-permissionswithpermissionsevent)
-  * [`fn withPermissionsEventMixin(value)`](#fn-permissionswithpermissionseventmixin)
-  * [`obj permissions-event`](#obj-permissionspermissions-event)
-    * [`fn withActions(value)`](#fn-permissionspermissions-eventwithactions)
-    * [`fn withAttestations(value)`](#fn-permissionspermissions-eventwithattestations)
-    * [`fn withChecks(value)`](#fn-permissionspermissions-eventwithchecks)
-    * [`fn withContents(value)`](#fn-permissionspermissions-eventwithcontents)
-    * [`fn withDeployments(value)`](#fn-permissionspermissions-eventwithdeployments)
-    * [`fn withDiscussions(value)`](#fn-permissionspermissions-eventwithdiscussions)
-    * [`fn withIdToken(value)`](#fn-permissionspermissions-eventwithidtoken)
-    * [`fn withIssues(value)`](#fn-permissionspermissions-eventwithissues)
-    * [`fn withPackages(value)`](#fn-permissionspermissions-eventwithpackages)
-    * [`fn withPages(value)`](#fn-permissionspermissions-eventwithpages)
-    * [`fn withPullRequests(value)`](#fn-permissionspermissions-eventwithpullrequests)
-    * [`fn withRepositoryProjects(value)`](#fn-permissionspermissions-eventwithrepositoryprojects)
-    * [`fn withSecurityEvents(value)`](#fn-permissionspermissions-eventwithsecurityevents)
-    * [`fn withStatuses(value)`](#fn-permissionspermissions-eventwithstatuses)
+  * [`fn withActions(value)`](#fn-permissionswithactions)
+  * [`fn withAttestations(value)`](#fn-permissionswithattestations)
+  * [`fn withChecks(value)`](#fn-permissionswithchecks)
+  * [`fn withContents(value)`](#fn-permissionswithcontents)
+  * [`fn withDeployments(value)`](#fn-permissionswithdeployments)
+  * [`fn withDiscussions(value)`](#fn-permissionswithdiscussions)
+  * [`fn withIdToken(value)`](#fn-permissionswithidtoken)
+  * [`fn withIssues(value)`](#fn-permissionswithissues)
+  * [`fn withPackages(value)`](#fn-permissionswithpackages)
+  * [`fn withPages(value)`](#fn-permissionswithpages)
+  * [`fn withPullRequests(value)`](#fn-permissionswithpullrequests)
+  * [`fn withRepositoryProjects(value)`](#fn-permissionswithrepositoryprojects)
+  * [`fn withSecurityEvents(value)`](#fn-permissionswithsecurityevents)
+  * [`fn withStatuses(value)`](#fn-permissionswithstatuses)
 * [`obj runs-on`](#obj-runs-on)
   * [`fn withExpressionSyntax(value)`](#fn-runs-onwithexpressionsyntax)
   * [`fn withGroup(value)`](#fn-runs-onwithgroup)
@@ -151,18 +128,6 @@ When a concurrent job or workflow is queued, if another job or workflow using th
 
 ```jsonnet
 withContainer(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`,`string`)
-
-A container to run any steps in a job that don't already specify a container. If you have steps that use both script and container actions, the container actions will run as sibling containers on the same network with the same volume mounts.
-If you do not set a container, all steps will run directly on the host specified by runs-on unless a step refers to an action configured to run in a container.
-### fn withContainerMixin
-
-```jsonnet
-withContainerMixin(value)
 ```
 
 PARAMETERS:
@@ -545,187 +510,6 @@ PARAMETERS:
 * **value** (`string`)
 
 
-### obj container
-
-
-#### fn container.withContainer
-
-```jsonnet
-container.withContainer(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### fn container.withContainerMixin
-
-```jsonnet
-container.withContainerMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### obj container.container
-
-
-##### fn container.container.withCredentials
-
-```jsonnet
-container.container.withCredentials(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command.
-##### fn container.container.withCredentialsMixin
-
-```jsonnet
-container.container.withCredentialsMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command.
-##### fn container.container.withEnv
-
-```jsonnet
-container.container.withEnv(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`,`string`)
-
-To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv
-##### fn container.container.withEnvMixin
-
-```jsonnet
-container.container.withEnvMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`,`string`)
-
-To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv
-##### fn container.container.withImage
-
-```jsonnet
-container.container.withImage(value)
-```
-
-PARAMETERS:
-
-* **value** (`string`)
-
-The Docker image to use as the container to run the action. The value can be the Docker Hub image name or a registry name.
-##### fn container.container.withOptions
-
-```jsonnet
-container.container.withOptions(value)
-```
-
-PARAMETERS:
-
-* **value** (`string`)
-
-Additional Docker container resource options. For a list of options, see https://docs.docker.com/engine/reference/commandline/create/#options.
-##### fn container.container.withPorts
-
-```jsonnet
-container.container.withPorts(value)
-```
-
-PARAMETERS:
-
-* **value** (`array`)
-
-Sets an array of ports to expose on the container.
-##### fn container.container.withPortsMixin
-
-```jsonnet
-container.container.withPortsMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`array`)
-
-Sets an array of ports to expose on the container.
-##### fn container.container.withVolumes
-
-```jsonnet
-container.container.withVolumes(value)
-```
-
-PARAMETERS:
-
-* **value** (`array`)
-
-Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.
-To specify a volume, you specify the source and destination path: <source>:<destinationPath>
-The <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.
-##### fn container.container.withVolumesMixin
-
-```jsonnet
-container.container.withVolumesMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`array`)
-
-Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.
-To specify a volume, you specify the source and destination path: <source>:<destinationPath>
-The <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.
-##### obj container.container.credentials
-
-
-###### fn container.container.credentials.withPassword
-
-```jsonnet
-container.container.credentials.withPassword(value)
-```
-
-PARAMETERS:
-
-* **value** (`string`)
-
-
-###### fn container.container.credentials.withUsername
-
-```jsonnet
-container.container.credentials.withUsername(value)
-```
-
-PARAMETERS:
-
-* **value** (`string`)
-
-
-##### obj container.container.env
-
-
-###### fn container.container.env.withStringContainingExpressionSyntax
-
-```jsonnet
-container.container.env.withStringContainingExpressionSyntax(value)
-```
-
-PARAMETERS:
-
-* **value** (`string`)
-
-
 ### obj continue-on-error
 
 
@@ -882,35 +666,10 @@ PARAMETERS:
 ### obj permissions
 
 
-#### fn permissions.withPermissionsEvent
+#### fn permissions.withActions
 
 ```jsonnet
-permissions.withPermissionsEvent(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### fn permissions.withPermissionsEventMixin
-
-```jsonnet
-permissions.withPermissionsEventMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### obj permissions.permissions-event
-
-
-##### fn permissions.permissions-event.withActions
-
-```jsonnet
-permissions.permissions-event.withActions(value)
+permissions.withActions(value)
 ```
 
 PARAMETERS:
@@ -919,10 +678,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withAttestations
+#### fn permissions.withAttestations
 
 ```jsonnet
-permissions.permissions-event.withAttestations(value)
+permissions.withAttestations(value)
 ```
 
 PARAMETERS:
@@ -931,10 +690,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withChecks
+#### fn permissions.withChecks
 
 ```jsonnet
-permissions.permissions-event.withChecks(value)
+permissions.withChecks(value)
 ```
 
 PARAMETERS:
@@ -943,10 +702,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withContents
+#### fn permissions.withContents
 
 ```jsonnet
-permissions.permissions-event.withContents(value)
+permissions.withContents(value)
 ```
 
 PARAMETERS:
@@ -955,10 +714,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withDeployments
+#### fn permissions.withDeployments
 
 ```jsonnet
-permissions.permissions-event.withDeployments(value)
+permissions.withDeployments(value)
 ```
 
 PARAMETERS:
@@ -967,10 +726,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withDiscussions
+#### fn permissions.withDiscussions
 
 ```jsonnet
-permissions.permissions-event.withDiscussions(value)
+permissions.withDiscussions(value)
 ```
 
 PARAMETERS:
@@ -979,10 +738,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withIdToken
+#### fn permissions.withIdToken
 
 ```jsonnet
-permissions.permissions-event.withIdToken(value)
+permissions.withIdToken(value)
 ```
 
 PARAMETERS:
@@ -991,10 +750,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withIssues
+#### fn permissions.withIssues
 
 ```jsonnet
-permissions.permissions-event.withIssues(value)
+permissions.withIssues(value)
 ```
 
 PARAMETERS:
@@ -1003,10 +762,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withPackages
+#### fn permissions.withPackages
 
 ```jsonnet
-permissions.permissions-event.withPackages(value)
+permissions.withPackages(value)
 ```
 
 PARAMETERS:
@@ -1015,10 +774,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withPages
+#### fn permissions.withPages
 
 ```jsonnet
-permissions.permissions-event.withPages(value)
+permissions.withPages(value)
 ```
 
 PARAMETERS:
@@ -1027,10 +786,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withPullRequests
+#### fn permissions.withPullRequests
 
 ```jsonnet
-permissions.permissions-event.withPullRequests(value)
+permissions.withPullRequests(value)
 ```
 
 PARAMETERS:
@@ -1039,10 +798,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withRepositoryProjects
+#### fn permissions.withRepositoryProjects
 
 ```jsonnet
-permissions.permissions-event.withRepositoryProjects(value)
+permissions.withRepositoryProjects(value)
 ```
 
 PARAMETERS:
@@ -1051,10 +810,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withSecurityEvents
+#### fn permissions.withSecurityEvents
 
 ```jsonnet
-permissions.permissions-event.withSecurityEvents(value)
+permissions.withSecurityEvents(value)
 ```
 
 PARAMETERS:
@@ -1063,10 +822,10 @@ PARAMETERS:
    - valid values: `"read"`, `"write"`, `"none"`
 
 
-##### fn permissions.permissions-event.withStatuses
+#### fn permissions.withStatuses
 
 ```jsonnet
-permissions.permissions-event.withStatuses(value)
+permissions.withStatuses(value)
 ```
 
 PARAMETERS:

@@ -19,7 +19,17 @@ local schema =
             // CRDsonnet fix: remove allOf validation as not relevant to the generation process
             items: super.items.allOf[1],
           },
+          container+:
+            schema.definitions.container
+            + { type: ['string', 'object'] },
         },
+      },
+      permissions+: {
+        oneOf: [
+          super.oneOf[0],
+          // reduce level
+          schema.definitions['permissions-event'],
+        ],
       },
     },
   }
