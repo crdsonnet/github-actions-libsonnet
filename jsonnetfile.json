@@ -4,17 +4,8 @@
     {
       "source": {
         "git": {
-          "remote": "https://github.com/SchemaStore/schemastore.git",
-          "subdir": "src/schemas/json/"
-        }
-      },
-      "version": "master"
-    },
-    {
-      "source": {
-        "git": {
-          "remote": "https://github.com/crdsonnet/crdsonnet.git",
-          "subdir": "crdsonnet"
+          "remote": "https://github.com/jsonnet-libs/docsonnet.git",
+          "subdir": "doc-util"
         }
       },
       "version": "master"

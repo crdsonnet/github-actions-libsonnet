@@ -1,16 +1,4 @@
-# github-actions-libsonnet
-
-Jsonnet library to create GitHub actions workflows.
-## Install
-
-```
-jb install github.com/crdsonnet/github-actions-libsonnet@main
-```
-
-## Usage
-
-```jsonnet
-local ga = import 'github.com/crdsonnet/github-actions-libsonnet/main.libsonnet';
+local ga = import './main.libsonnet';
 local step = ga.job.steps;
 
 local exampleWorkflow =
@@ -26,11 +14,3 @@ local exampleWorkflow =
   });
 
 std.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)
-
-```
-
-
-## Subpackages
-
-* [job](job/index.md)
-* [workflow](workflow.md)
