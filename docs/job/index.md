@@ -4,7 +4,7 @@
 
 ## Subpackages
 
-* [steps](steps.md)
+* [step](step.md)
 
 ## Index
 

@@ -1,5 +1,4 @@
 local ga = import './main.libsonnet';
-local step = ga.job.steps;
 
 local exampleWorkflow =
   ga.workflow.withName('example workflow')
@@ -8,8 +7,8 @@ local exampleWorkflow =
     example:
       ga.job.withRunsOn('ubuntu-latest')
       + ga.job.withSteps(
-        step.withName('Checkout')
-        + step.withUses('actions/checkout@v4')
+        ga.job.step.withName('Checkout')
+        + ga.job.step.withUses('actions/checkout@v4')
       ),
   });
 

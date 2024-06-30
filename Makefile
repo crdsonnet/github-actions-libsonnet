@@ -31,4 +31,4 @@ docs: jsonnetfile.json
 
 .PHONY: generate
 generate: jsonnetfile.json
-	jsonnet -J generator/vendor -S generator/generate.jsonnet | jsonnetfmt - > main.libsonnet
+	jsonnet -J generator/vendor -S generator/generate.jsonnet | jsonnetfmt - > raw.libsonnet
