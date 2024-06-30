@@ -11,6 +11,7 @@
 * [`fn withConcurrency(value)`](#fn-withconcurrency)
 * [`fn withConcurrencyMixin(value)`](#fn-withconcurrencymixin)
 * [`fn withContainer(value)`](#fn-withcontainer)
+* [`fn withContainerMixin(value)`](#fn-withcontainermixin)
 * [`fn withContinueOnError(value)`](#fn-withcontinueonerror)
 * [`fn withContinueOnErrorMixin(value)`](#fn-withcontinueonerrormixin)
 * [`fn withDefaults(value)`](#fn-withdefaults)
@@ -46,6 +47,40 @@
     * [`fn withGroup(value)`](#fn-concurrencyconcurrencywithgroup)
     * [`obj cancel-in-progress`](#obj-concurrencyconcurrencycancel-in-progress)
       * [`fn withExpressionSyntax(value)`](#fn-concurrencyconcurrencycancel-in-progresswithexpressionsyntax)
+* [`obj container`](#obj-container)
+  * [`fn withContainer(value)`](#fn-containerwithcontainer)
+  * [`fn withContainerMixin(value)`](#fn-containerwithcontainermixin)
+  * [`fn withCredentials(value)`](#fn-containerwithcredentials)
+  * [`fn withCredentialsMixin(value)`](#fn-containerwithcredentialsmixin)
+  * [`fn withEnv(value)`](#fn-containerwithenv)
+  * [`fn withEnvMixin(value)`](#fn-containerwithenvmixin)
+  * [`fn withImage(value)`](#fn-containerwithimage)
+  * [`fn withOptions(value)`](#fn-containerwithoptions)
+  * [`fn withPorts(value)`](#fn-containerwithports)
+  * [`fn withPortsMixin(value)`](#fn-containerwithportsmixin)
+  * [`fn withVolumes(value)`](#fn-containerwithvolumes)
+  * [`fn withVolumesMixin(value)`](#fn-containerwithvolumesmixin)
+  * [`obj container`](#obj-containercontainer)
+    * [`fn withCredentials(value)`](#fn-containercontainerwithcredentials)
+    * [`fn withCredentialsMixin(value)`](#fn-containercontainerwithcredentialsmixin)
+    * [`fn withEnv(value)`](#fn-containercontainerwithenv)
+    * [`fn withEnvMixin(value)`](#fn-containercontainerwithenvmixin)
+    * [`fn withImage(value)`](#fn-containercontainerwithimage)
+    * [`fn withOptions(value)`](#fn-containercontainerwithoptions)
+    * [`fn withPorts(value)`](#fn-containercontainerwithports)
+    * [`fn withPortsMixin(value)`](#fn-containercontainerwithportsmixin)
+    * [`fn withVolumes(value)`](#fn-containercontainerwithvolumes)
+    * [`fn withVolumesMixin(value)`](#fn-containercontainerwithvolumesmixin)
+    * [`obj credentials`](#obj-containercontainercredentials)
+      * [`fn withPassword(value)`](#fn-containercontainercredentialswithpassword)
+      * [`fn withUsername(value)`](#fn-containercontainercredentialswithusername)
+    * [`obj env`](#obj-containercontainerenv)
+      * [`fn withStringContainingExpressionSyntax(value)`](#fn-containercontainerenvwithstringcontainingexpressionsyntax)
+  * [`obj credentials`](#obj-containercredentials)
+    * [`fn withPassword(value)`](#fn-containercredentialswithpassword)
+    * [`fn withUsername(value)`](#fn-containercredentialswithusername)
+  * [`obj env`](#obj-containerenv)
+    * [`fn withStringContainingExpressionSyntax(value)`](#fn-containerenvwithstringcontainingexpressionsyntax)
 * [`obj continue-on-error`](#obj-continue-on-error)
   * [`fn withExpressionSyntax(value)`](#fn-continue-on-errorwithexpressionsyntax)
 * [`obj defaults`](#obj-defaults)
@@ -132,7 +167,19 @@ withContainer(value)
 
 PARAMETERS:
 
-* **value** (`object`,`string`)
+* **value** (`object`)
+
+A container to run any steps in a job that don't already specify a container. If you have steps that use both script and container actions, the container actions will run as sibling containers on the same network with the same volume mounts.
+If you do not set a container, all steps will run directly on the host specified by runs-on unless a step refers to an action configured to run in a container.
+### fn withContainerMixin
+
+```jsonnet
+withContainerMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`)
 
 A container to run any steps in a job that don't already specify a container. If you have steps that use both script and container actions, the container actions will run as sibling containers on the same network with the same volume mounts.
 If you do not set a container, all steps will run directly on the host specified by runs-on unless a step refers to an action configured to run in a container.
@@ -503,6 +550,340 @@ When a concurrent job or workflow is queued, if another job or workflow using th
 
 ```jsonnet
 concurrency.concurrency.cancel-in-progress.withExpressionSyntax(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+### obj container
+
+
+#### fn container.withContainer
+
+```jsonnet
+container.withContainer(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`)
+
+
+#### fn container.withContainerMixin
+
+```jsonnet
+container.withContainerMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`)
+
+
+#### fn container.withCredentials
+
+```jsonnet
+container.withCredentials(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`)
+
+If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command.
+#### fn container.withCredentialsMixin
+
+```jsonnet
+container.withCredentialsMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`)
+
+If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command.
+#### fn container.withEnv
+
+```jsonnet
+container.withEnv(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`,`string`)
+
+To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+#### fn container.withEnvMixin
+
+```jsonnet
+container.withEnvMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`,`string`)
+
+To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+#### fn container.withImage
+
+```jsonnet
+container.withImage(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+The Docker image to use as the container to run the action. The value can be the Docker Hub image name or a registry name.
+#### fn container.withOptions
+
+```jsonnet
+container.withOptions(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+Additional Docker container resource options. For a list of options, see https://docs.docker.com/engine/reference/commandline/create/#options.
+#### fn container.withPorts
+
+```jsonnet
+container.withPorts(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of ports to expose on the container.
+#### fn container.withPortsMixin
+
+```jsonnet
+container.withPortsMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of ports to expose on the container.
+#### fn container.withVolumes
+
+```jsonnet
+container.withVolumes(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.
+To specify a volume, you specify the source and destination path: <source>:<destinationPath>
+The <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.
+#### fn container.withVolumesMixin
+
+```jsonnet
+container.withVolumesMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.
+To specify a volume, you specify the source and destination path: <source>:<destinationPath>
+The <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.
+#### obj container.container
+
+
+##### fn container.container.withCredentials
+
+```jsonnet
+container.container.withCredentials(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`)
+
+If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command.
+##### fn container.container.withCredentialsMixin
+
+```jsonnet
+container.container.withCredentialsMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`)
+
+If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command.
+##### fn container.container.withEnv
+
+```jsonnet
+container.container.withEnv(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`,`string`)
+
+To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+##### fn container.container.withEnvMixin
+
+```jsonnet
+container.container.withEnvMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`object`,`string`)
+
+To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv
+##### fn container.container.withImage
+
+```jsonnet
+container.container.withImage(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+The Docker image to use as the container to run the action. The value can be the Docker Hub image name or a registry name.
+##### fn container.container.withOptions
+
+```jsonnet
+container.container.withOptions(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+Additional Docker container resource options. For a list of options, see https://docs.docker.com/engine/reference/commandline/create/#options.
+##### fn container.container.withPorts
+
+```jsonnet
+container.container.withPorts(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of ports to expose on the container.
+##### fn container.container.withPortsMixin
+
+```jsonnet
+container.container.withPortsMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of ports to expose on the container.
+##### fn container.container.withVolumes
+
+```jsonnet
+container.container.withVolumes(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.
+To specify a volume, you specify the source and destination path: <source>:<destinationPath>
+The <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.
+##### fn container.container.withVolumesMixin
+
+```jsonnet
+container.container.withVolumesMixin(value)
+```
+
+PARAMETERS:
+
+* **value** (`array`)
+
+Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.
+To specify a volume, you specify the source and destination path: <source>:<destinationPath>
+The <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.
+##### obj container.container.credentials
+
+
+###### fn container.container.credentials.withPassword
+
+```jsonnet
+container.container.credentials.withPassword(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+###### fn container.container.credentials.withUsername
+
+```jsonnet
+container.container.credentials.withUsername(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+##### obj container.container.env
+
+
+###### fn container.container.env.withStringContainingExpressionSyntax
+
+```jsonnet
+container.container.env.withStringContainingExpressionSyntax(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+#### obj container.credentials
+
+
+##### fn container.credentials.withPassword
+
+```jsonnet
+container.credentials.withPassword(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+##### fn container.credentials.withUsername
+
+```jsonnet
+container.credentials.withUsername(value)
+```
+
+PARAMETERS:
+
+* **value** (`string`)
+
+
+#### obj container.env
+
+
+##### fn container.env.withStringContainingExpressionSyntax
+
+```jsonnet
+container.env.withStringContainingExpressionSyntax(value)
 ```
 
 PARAMETERS:

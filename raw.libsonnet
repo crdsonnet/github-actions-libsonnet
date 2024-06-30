@@ -1647,10 +1647,232 @@
               },
             },
         },
-      '#withContainer': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string', 'object'] }], help: "A container to run any steps in a job that don't already specify a container. If you have steps that use both script and container actions, the container actions will run as sibling containers on the same network with the same volume mounts.\nIf you do not set a container, all steps will run directly on the host specified by runs-on unless a step refers to an action configured to run in a container." } },
+      '#withContainer': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: "A container to run any steps in a job that don't already specify a container. If you have steps that use both script and container actions, the container actions will run as sibling containers on the same network with the same volume mounts.\nIf you do not set a container, all steps will run directly on the host specified by runs-on unless a step refers to an action configured to run in a container." } },
       withContainer(value): {
         container: value,
       },
+      '#withContainerMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: "A container to run any steps in a job that don't already specify a container. If you have steps that use both script and container actions, the container actions will run as sibling containers on the same network with the same volume mounts.\nIf you do not set a container, all steps will run directly on the host specified by runs-on unless a step refers to an action configured to run in a container." } },
+      withContainerMixin(value): {
+        container+: value,
+      },
+      container+:
+        {
+          '#withContainer': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: '' } },
+          withContainer(value): {
+            container: value,
+          },
+          '#withContainerMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: '' } },
+          withContainerMixin(value): {
+            container+: value,
+          },
+          container+:
+            {
+              '#withCredentials': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: "If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command." } },
+              withCredentials(value): {
+                container+: {
+                  credentials: value,
+                },
+              },
+              '#withCredentialsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: "If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command." } },
+              withCredentialsMixin(value): {
+                container+: {
+                  credentials+: value,
+                },
+              },
+              credentials+:
+                {
+                  '#withPassword': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+                  withPassword(value): {
+                    container+: {
+                      credentials+: {
+                        password: value,
+                      },
+                    },
+                  },
+                  '#withUsername': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+                  withUsername(value): {
+                    container+: {
+                      credentials+: {
+                        username: value,
+                      },
+                    },
+                  },
+                },
+              '#withEnv': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object', 'string'] }], help: 'To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv' } },
+              withEnv(value): {
+                container+: {
+                  env: value,
+                },
+              },
+              '#withEnvMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object', 'string'] }], help: 'To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv' } },
+              withEnvMixin(value): {
+                container+: {
+                  env+: value,
+                },
+              },
+              env+:
+                {
+                  '#withStringContainingExpressionSyntax': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+                  withStringContainingExpressionSyntax(value): {
+                    container+: {
+                      env+: {
+                        stringContainingExpressionSyntax: value,
+                      },
+                    },
+                  },
+                },
+              '#withImage': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'The Docker image to use as the container to run the action. The value can be the Docker Hub image name or a registry name.' } },
+              withImage(value): {
+                container+: {
+                  image: value,
+                },
+              },
+              '#withOptions': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'Additional Docker container resource options. For a list of options, see https://docs.docker.com/engine/reference/commandline/create/#options.' } },
+              withOptions(value): {
+                container+: {
+                  options: value,
+                },
+              },
+              '#withPorts': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of ports to expose on the container.' } },
+              withPorts(value): {
+                container+: {
+                  ports:
+                    (if std.isArray(value)
+                     then value
+                     else [value]),
+                },
+              },
+              '#withPortsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of ports to expose on the container.' } },
+              withPortsMixin(value): {
+                container+: {
+                  ports+:
+                    (if std.isArray(value)
+                     then value
+                     else [value]),
+                },
+              },
+              '#withVolumes': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.\nTo specify a volume, you specify the source and destination path: <source>:<destinationPath>\nThe <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.' } },
+              withVolumes(value): {
+                container+: {
+                  volumes:
+                    (if std.isArray(value)
+                     then value
+                     else [value]),
+                },
+              },
+              '#withVolumesMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.\nTo specify a volume, you specify the source and destination path: <source>:<destinationPath>\nThe <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.' } },
+              withVolumesMixin(value): {
+                container+: {
+                  volumes+:
+                    (if std.isArray(value)
+                     then value
+                     else [value]),
+                },
+              },
+            },
+          '#withCredentials': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: "If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command." } },
+          withCredentials(value): {
+            container+: {
+              credentials: value,
+            },
+          },
+          '#withCredentialsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: "If the image's container registry requires authentication to pull the image, you can use credentials to set a map of the username and password. The credentials are the same values that you would provide to the `docker login` command." } },
+          withCredentialsMixin(value): {
+            container+: {
+              credentials+: value,
+            },
+          },
+          credentials+:
+            {
+              '#withPassword': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+              withPassword(value): {
+                container+: {
+                  credentials+: {
+                    password: value,
+                  },
+                },
+              },
+              '#withUsername': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+              withUsername(value): {
+                container+: {
+                  credentials+: {
+                    username: value,
+                  },
+                },
+              },
+            },
+          '#withEnv': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object', 'string'] }], help: 'To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv' } },
+          withEnv(value): {
+            container+: {
+              env: value,
+            },
+          },
+          '#withEnvMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object', 'string'] }], help: 'To set custom environment variables, you need to specify the variables in the workflow file. You can define environment variables for a step, job, or entire workflow using the jobs.<job_id>.steps[*].env, jobs.<job_id>.env, and env keywords. For more information, see https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#jobsjob_idstepsenv' } },
+          withEnvMixin(value): {
+            container+: {
+              env+: value,
+            },
+          },
+          env+:
+            {
+              '#withStringContainingExpressionSyntax': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+              withStringContainingExpressionSyntax(value): {
+                container+: {
+                  env+: {
+                    stringContainingExpressionSyntax: value,
+                  },
+                },
+              },
+            },
+          '#withImage': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'The Docker image to use as the container to run the action. The value can be the Docker Hub image name or a registry name.' } },
+          withImage(value): {
+            container+: {
+              image: value,
+            },
+          },
+          '#withOptions': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'Additional Docker container resource options. For a list of options, see https://docs.docker.com/engine/reference/commandline/create/#options.' } },
+          withOptions(value): {
+            container+: {
+              options: value,
+            },
+          },
+          '#withPorts': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of ports to expose on the container.' } },
+          withPorts(value): {
+            container+: {
+              ports:
+                (if std.isArray(value)
+                 then value
+                 else [value]),
+            },
+          },
+          '#withPortsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of ports to expose on the container.' } },
+          withPortsMixin(value): {
+            container+: {
+              ports+:
+                (if std.isArray(value)
+                 then value
+                 else [value]),
+            },
+          },
+          '#withVolumes': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.\nTo specify a volume, you specify the source and destination path: <source>:<destinationPath>\nThe <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.' } },
+          withVolumes(value): {
+            container+: {
+              volumes:
+                (if std.isArray(value)
+                 then value
+                 else [value]),
+            },
+          },
+          '#withVolumesMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'Sets an array of volumes for the container to use. You can use volumes to share data between services or other steps in a job. You can specify named Docker volumes, anonymous Docker volumes, or bind mounts on the host.\nTo specify a volume, you specify the source and destination path: <source>:<destinationPath>\nThe <source> is a volume name or an absolute path on the host machine, and <destinationPath> is an absolute path in the container.' } },
+          withVolumesMixin(value): {
+            container+: {
+              volumes+:
+                (if std.isArray(value)
+                 then value
+                 else [value]),
+            },
+          },
+        },
       '#withContinueOnError': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'Prevents a workflow run from failing when a job fails. Set to true to allow a workflow run to pass when this job fails.' } },
       withContinueOnError(value): {
         'continue-on-error': value,
