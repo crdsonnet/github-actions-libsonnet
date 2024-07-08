@@ -24,46 +24,35 @@
       },
       concurrency+:
         {
-          '#withConcurrency': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: '' } },
-          withConcurrency(value): {
-            concurrency: value,
+          '#withCancelInProgress': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
+          withCancelInProgress(value): {
+            concurrency+: {
+              'cancel-in-progress': value,
+            },
           },
-          '#withConcurrencyMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: '' } },
-          withConcurrencyMixin(value): {
-            concurrency+: value,
+          '#withCancelInProgressMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
+          withCancelInProgressMixin(value): {
+            concurrency+: {
+              'cancel-in-progress'+: value,
+            },
           },
-          concurrency+:
+          'cancel-in-progress'+:
             {
-              '#withCancelInProgress': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
-              withCancelInProgress(value): {
+              '#withExpressionSyntax': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+              withExpressionSyntax(value): {
                 concurrency+: {
-                  'cancel-in-progress': value,
-                },
-              },
-              '#withCancelInProgressMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
-              withCancelInProgressMixin(value): {
-                concurrency+: {
-                  'cancel-in-progress'+: value,
-                },
-              },
-              'cancel-in-progress'+:
-                {
-                  '#withExpressionSyntax': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
-                  withExpressionSyntax(value): {
-                    concurrency+: {
-                      'cancel-in-progress'+: {
-                        expressionSyntax: value,
-                      },
-                    },
+                  'cancel-in-progress'+: {
+                    expressionSyntax: value,
                   },
-                },
-              '#withGroup': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. Any previously pending job or workflow in the concurrency group will be canceled.' } },
-              withGroup(value): {
-                concurrency+: {
-                  group: value,
                 },
               },
             },
+          '#withGroup': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. Any previously pending job or workflow in the concurrency group will be canceled.' } },
+          withGroup(value): {
+            concurrency+: {
+              group: value,
+            },
+          },
         },
       '#withDefaults': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: 'A map of default settings that will apply to all jobs in the workflow.' } },
       withDefaults(value): {
@@ -1608,46 +1597,35 @@
       },
       concurrency+:
         {
-          '#withConcurrency': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: '' } },
-          withConcurrency(value): {
-            concurrency: value,
+          '#withCancelInProgress': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
+          withCancelInProgress(value): {
+            concurrency+: {
+              'cancel-in-progress': value,
+            },
           },
-          '#withConcurrencyMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: '' } },
-          withConcurrencyMixin(value): {
-            concurrency+: value,
+          '#withCancelInProgressMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
+          withCancelInProgressMixin(value): {
+            concurrency+: {
+              'cancel-in-progress'+: value,
+            },
           },
-          concurrency+:
+          'cancel-in-progress'+:
             {
-              '#withCancelInProgress': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
-              withCancelInProgress(value): {
+              '#withExpressionSyntax': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
+              withExpressionSyntax(value): {
                 concurrency+: {
-                  'cancel-in-progress': value,
-                },
-              },
-              '#withCancelInProgressMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.' } },
-              withCancelInProgressMixin(value): {
-                concurrency+: {
-                  'cancel-in-progress'+: value,
-                },
-              },
-              'cancel-in-progress'+:
-                {
-                  '#withExpressionSyntax': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: '' } },
-                  withExpressionSyntax(value): {
-                    concurrency+: {
-                      'cancel-in-progress'+: {
-                        expressionSyntax: value,
-                      },
-                    },
+                  'cancel-in-progress'+: {
+                    expressionSyntax: value,
                   },
-                },
-              '#withGroup': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. Any previously pending job or workflow in the concurrency group will be canceled.' } },
-              withGroup(value): {
-                concurrency+: {
-                  group: value,
                 },
               },
             },
+          '#withGroup': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. Any previously pending job or workflow in the concurrency group will be canceled.' } },
+          withGroup(value): {
+            concurrency+: {
+              group: value,
+            },
+          },
         },
       '#withContainer': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['object'] }], help: "A container to run any steps in a job that don't already specify a container. If you have steps that use both script and container actions, the container actions will run as sibling containers on the same network with the same volume mounts.\nIf you do not set a container, all steps will run directly on the host specified by runs-on unless a step refers to an action configured to run in a container." } },
       withContainer(value): {

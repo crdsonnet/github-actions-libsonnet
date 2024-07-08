@@ -8,6 +8,15 @@ local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
 local schema =
   (import './vendor/github.com/SchemaStore/schemastore/src/schemas/json/github-workflow.json')
   + {
+    properties+: {
+      concurrency+: {
+        oneOf: [
+          super.oneOf[0],
+          // reduce level
+          schema.definitions.concurrency,
+        ],
+      },
+    },
     definitions+: {
       // CRDsonnet fix: remove oneOf validation as not relevant to the generation process
       ref: std.mergePatch(super.ref, { type: 'object', oneOf: null }),
@@ -21,6 +30,13 @@ local schema =
           },
           // reduce level without reducing functionality
           container+: schema.definitions.container,
+          concurrency+: {
+            oneOf: [
+              super.oneOf[0],
+              // reduce level
+              schema.definitions.concurrency,
+            ],
+          },
         },
       },
       permissions+: {

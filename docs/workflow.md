@@ -19,14 +19,11 @@
 * [`fn withPermissionsMixin(value)`](#fn-withpermissionsmixin)
 * [`fn withRunName(value)`](#fn-withrunname)
 * [`obj concurrency`](#obj-concurrency)
-  * [`fn withConcurrency(value)`](#fn-concurrencywithconcurrency)
-  * [`fn withConcurrencyMixin(value)`](#fn-concurrencywithconcurrencymixin)
-  * [`obj concurrency`](#obj-concurrencyconcurrency)
-    * [`fn withCancelInProgress(value)`](#fn-concurrencyconcurrencywithcancelinprogress)
-    * [`fn withCancelInProgressMixin(value)`](#fn-concurrencyconcurrencywithcancelinprogressmixin)
-    * [`fn withGroup(value)`](#fn-concurrencyconcurrencywithgroup)
-    * [`obj cancel-in-progress`](#obj-concurrencyconcurrencycancel-in-progress)
-      * [`fn withExpressionSyntax(value)`](#fn-concurrencyconcurrencycancel-in-progresswithexpressionsyntax)
+  * [`fn withCancelInProgress(value)`](#fn-concurrencywithcancelinprogress)
+  * [`fn withCancelInProgressMixin(value)`](#fn-concurrencywithcancelinprogressmixin)
+  * [`fn withGroup(value)`](#fn-concurrencywithgroup)
+  * [`obj cancel-in-progress`](#obj-concurrencycancel-in-progress)
+    * [`fn withExpressionSyntax(value)`](#fn-concurrencycancel-in-progresswithexpressionsyntax)
 * [`obj defaults`](#obj-defaults)
   * [`fn withRun(value)`](#fn-defaultswithrun)
   * [`fn withRunMixin(value)`](#fn-defaultswithrunmixin)
@@ -388,35 +385,10 @@ The name for workflow runs generated from the workflow. GitHub displays the work
 ### obj concurrency
 
 
-#### fn concurrency.withConcurrency
+#### fn concurrency.withCancelInProgress
 
 ```jsonnet
-concurrency.withConcurrency(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### fn concurrency.withConcurrencyMixin
-
-```jsonnet
-concurrency.withConcurrencyMixin(value)
-```
-
-PARAMETERS:
-
-* **value** (`object`)
-
-
-#### obj concurrency.concurrency
-
-
-##### fn concurrency.concurrency.withCancelInProgress
-
-```jsonnet
-concurrency.concurrency.withCancelInProgress(value)
+concurrency.withCancelInProgress(value)
 ```
 
 PARAMETERS:
@@ -424,10 +396,10 @@ PARAMETERS:
 * **value** (`boolean`,`string`)
 
 To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.
-##### fn concurrency.concurrency.withCancelInProgressMixin
+#### fn concurrency.withCancelInProgressMixin
 
 ```jsonnet
-concurrency.concurrency.withCancelInProgressMixin(value)
+concurrency.withCancelInProgressMixin(value)
 ```
 
 PARAMETERS:
@@ -435,10 +407,10 @@ PARAMETERS:
 * **value** (`boolean`,`string`)
 
 To cancel any currently running job or workflow in the same concurrency group, specify cancel-in-progress: true.
-##### fn concurrency.concurrency.withGroup
+#### fn concurrency.withGroup
 
 ```jsonnet
-concurrency.concurrency.withGroup(value)
+concurrency.withGroup(value)
 ```
 
 PARAMETERS:
@@ -446,13 +418,13 @@ PARAMETERS:
 * **value** (`string`)
 
 When a concurrent job or workflow is queued, if another job or workflow using the same concurrency group in the repository is in progress, the queued job or workflow will be pending. Any previously pending job or workflow in the concurrency group will be canceled.
-##### obj concurrency.concurrency.cancel-in-progress
+#### obj concurrency.cancel-in-progress
 
 
-###### fn concurrency.concurrency.cancel-in-progress.withExpressionSyntax
+##### fn concurrency.cancel-in-progress.withExpressionSyntax
 
 ```jsonnet
-concurrency.concurrency.cancel-in-progress.withExpressionSyntax(value)
+concurrency.cancel-in-progress.withExpressionSyntax(value)
 ```
 
 PARAMETERS:
