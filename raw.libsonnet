@@ -2455,27 +2455,27 @@
           },
           composite+:
             {
-              '#withSteps': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'The run steps that you plan to run in this action.' } },
-              withSteps(value): {
+              '#withStep': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'The run steps that you plan to run in this action.' } },
+              withStep(value): {
                 runs+: {
-                  steps:
+                  step:
                     (if std.isArray(value)
                      then value
                      else [value]),
                 },
               },
-              '#withStepsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'The run steps that you plan to run in this action.' } },
-              withStepsMixin(value): {
+              '#withStepMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'The run steps that you plan to run in this action.' } },
+              withStepMixin(value): {
                 runs+: {
-                  steps+:
+                  step+:
                     (if std.isArray(value)
                      then value
                      else [value]),
                 },
               },
-              steps+:
+              step+:
                 {
-                  '#': { help: '', name: 'steps' },
+                  '#': { help: '', name: 'step' },
                   '#withContinueOnError': { 'function': { args: [{ default: false, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'Prevents a job from failing when a step fails. Set to true to allow a job to pass when this step fails.' } },
                   withContinueOnError(value=false): {
                     'continue-on-error': value,

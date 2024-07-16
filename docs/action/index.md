@@ -4,7 +4,7 @@
 
 ## Subpackages
 
-* [runs.composite.steps](runs/composite/steps.md)
+* [runs.composite.step](runs/composite/step.md)
 
 ## Index
 

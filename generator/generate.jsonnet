@@ -62,7 +62,13 @@ local actionschema =
     // rename refs for nicer output
     definitions+: {
       javascript: self['runs-javascript'],
-      composite: self['runs-composite'],
+      composite: self['runs-composite'] + {
+        properties+: {
+          steps:: {},
+          local steps = super.steps,
+          step: steps,
+        },
+      },
       docker: self['runs-docker'],
     },
     properties+: {
