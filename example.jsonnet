@@ -6,10 +6,10 @@ local exampleWorkflow =
   + ga.workflow.withJobs({
     example:
       ga.job.withRunsOn('ubuntu-latest')
-      + ga.job.withSteps(
+      + ga.job.withSteps([
         ga.job.step.withName('Checkout')
-        + ga.job.step.withUses('actions/checkout@v4')
-      ),
+        + ga.job.step.withUses('actions/checkout@v4'),
+      ]),
   });
 
 std.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)
