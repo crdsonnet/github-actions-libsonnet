@@ -24,9 +24,11 @@ local schema =
       eventObject: { type: 'object' },
       normalJob+: {
         properties+: {
-          steps+: {
+          steps:: {},
+          local steps = super.steps,
+          step: steps + {
             // CRDsonnet fix: remove allOf validation as not relevant to the generation process
-            items: super.items.allOf[1],
+            items: steps.items.allOf[1],
           },
           // reduce level without reducing functionality
           container+: schema.definitions.container,

@@ -2149,23 +2149,23 @@
       withServicesMixin(value): {
         services+: value,
       },
-      '#withSteps': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'A job contains a sequence of tasks called steps. Steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry. Not all steps run actions, but all actions run as a step. Each step runs in its own process in the virtual environment and has access to the workspace and filesystem. Because steps run in their own process, changes to environment variables are not preserved between steps. GitHub provides built-in steps to set up and complete a job.\nMust contain either `uses` or `run`\n' } },
-      withSteps(value): {
-        steps:
+      '#withStep': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'A job contains a sequence of tasks called steps. Steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry. Not all steps run actions, but all actions run as a step. Each step runs in its own process in the virtual environment and has access to the workspace and filesystem. Because steps run in their own process, changes to environment variables are not preserved between steps. GitHub provides built-in steps to set up and complete a job.\nMust contain either `uses` or `run`\n' } },
+      withStep(value): {
+        step:
           (if std.isArray(value)
            then value
            else [value]),
       },
-      '#withStepsMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'A job contains a sequence of tasks called steps. Steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry. Not all steps run actions, but all actions run as a step. Each step runs in its own process in the virtual environment and has access to the workspace and filesystem. Because steps run in their own process, changes to environment variables are not preserved between steps. GitHub provides built-in steps to set up and complete a job.\nMust contain either `uses` or `run`\n' } },
-      withStepsMixin(value): {
-        steps+:
+      '#withStepMixin': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['array'] }], help: 'A job contains a sequence of tasks called steps. Steps can run commands, run setup tasks, or run an action in your repository, a public repository, or an action published in a Docker registry. Not all steps run actions, but all actions run as a step. Each step runs in its own process in the virtual environment and has access to the workspace and filesystem. Because steps run in their own process, changes to environment variables are not preserved between steps. GitHub provides built-in steps to set up and complete a job.\nMust contain either `uses` or `run`\n' } },
+      withStepMixin(value): {
+        step+:
           (if std.isArray(value)
            then value
            else [value]),
       },
-      steps+:
+      step+:
         {
-          '#': { help: '', name: 'steps' },
+          '#': { help: '', name: 'step' },
           '#withContinueOnError': { 'function': { args: [{ default: false, enums: null, name: 'value', type: ['boolean', 'string'] }], help: 'Prevents a job from failing when a step fails. Set to true to allow a job to pass when this step fails.' } },
           withContinueOnError(value=false): {
             'continue-on-error': value,
