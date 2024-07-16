@@ -2,6 +2,7 @@
 { workflow+: { '#': { help: '', name: 'workflow' } } }
 + { job+: { '#': { help: '', name: 'job' } } }
 + { action+: { '#': { help: '', name: 'action' } } }
++ { action+: { input+: { '#': { help: '', name: 'action' } } } }
 + {
   '#': {
     filename: 'main.libsonnet',
@@ -2653,24 +2654,24 @@
               },
             },
         },
-    },
-  actionInput+:
-    {
-      '#withDefault': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: "A string representing the default value. The default value is used when an input parameter isn't specified in a workflow file." } },
-      withDefault(value): {
-        default: value,
-      },
-      '#withDeprecationMessage': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'A string shown to users using the deprecated input.' } },
-      withDeprecationMessage(value): {
-        deprecationMessage: value,
-      },
-      '#withDescription': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'A string description of the input parameter.' } },
-      withDescription(value): {
-        description: value,
-      },
-      '#withRequired': { 'function': { args: [{ default: true, enums: null, name: 'value', type: ['boolean'] }], help: 'A boolean to indicate whether the action requires the input parameter. Set to `true` when the parameter is required.' } },
-      withRequired(value=true): {
-        required: value,
-      },
+      input+:
+        {
+          '#withDefault': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: "A string representing the default value. The default value is used when an input parameter isn't specified in a workflow file." } },
+          withDefault(value): {
+            default: value,
+          },
+          '#withDeprecationMessage': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'A string shown to users using the deprecated input.' } },
+          withDeprecationMessage(value): {
+            deprecationMessage: value,
+          },
+          '#withDescription': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'A string description of the input parameter.' } },
+          withDescription(value): {
+            description: value,
+          },
+          '#withRequired': { 'function': { args: [{ default: true, enums: null, name: 'value', type: ['boolean'] }], help: 'A boolean to indicate whether the action requires the input parameter. Set to `true` when the parameter is required.' } },
+          withRequired(value=true): {
+            required: value,
+          },
+        },
     },
 }

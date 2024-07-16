@@ -24,9 +24,7 @@
     },
   },
 
-  local input = super.actionInput,
   action+: {
-    input: input + { '#': { help: '', name: 'input' } },
     runs+: {
       composite+: {
         // The generated code implements a singular 'step' to accomodate for a nicer library.

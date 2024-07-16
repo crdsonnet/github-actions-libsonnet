@@ -97,7 +97,12 @@ local asts = [
   crdsonnet.schema.render('workflow', schema, processor),
   crdsonnet.schema.render('job', jobschema, processor),
   crdsonnet.schema.render('action', actionschema, processor),
-  crdsonnet.schema.render('actionInput', inputsschema, processor),
+  a.object.new([
+    a.field.new(
+      a.id.new('action'),
+      crdsonnet.schema.render('input', inputsschema, processor)
+    ),
+  ]),
 ];
 
 local docstring =
@@ -130,6 +135,7 @@ local docstring =
 + "{ workflow+: { '#': { help: '', name: 'workflow' } } }\n+ "
 + "{ job+: { '#': { help: '', name: 'job' } } }\n+ "
 + "{ action+: { '#': { help: '', name: 'action' } } }\n+ "
++ "{ action+: { input+: { '#': { help: '', name: 'action' } } } }\n+ "
 + (
   autils.deepMergeObjects([docstring] + asts)
 ).toString()
