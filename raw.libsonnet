@@ -5,12 +5,12 @@
 + {
   '#': {
     filename: 'main.libsonnet',
-    help: "Jsonnet library to create GitHub actions workflows.\n## Install\n\n```\njb install github.com/crdsonnet/github-actions-libsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal ga = import 'github.com/crdsonnet/github-actions-libsonnet/main.libsonnet';\n\nlocal exampleWorkflow =\n  ga.workflow.withName('example workflow')\n  + ga.workflow.on.pull_request.withBranches(['main'])\n  + ga.workflow.withJobs({\n    example:\n      ga.job.withRunsOn('ubuntu-latest')\n      + ga.job.withSteps(\n        ga.job.step.withName('Checkout')\n        + ga.job.step.withUses('actions/checkout@v4')\n      ),\n  });\n\nstd.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)\n\n```\n",
+    help: "Jsonnet library to create GitHub actions workflows.\n## Install\n\n```\njb install github.com/crdsonnet/github-actions-libsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal ga = import 'github.com/crdsonnet/github-actions-libsonnet/main.libsonnet';\n\nlocal exampleWorkflow =\n  ga.workflow.withName('example workflow')\n  + ga.workflow.on.pull_request.withBranches(['main'])\n  + ga.workflow.withJobs({\n    example:\n      ga.job.withRunsOn('ubuntu-latest')\n      + ga.job.withSteps([\n        ga.job.step.withName('Checkout')\n        + ga.job.step.withUses('actions/checkout@v4'),\n      ]),\n  });\n\nstd.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)\n\n```\n",
     'import': 'github.com/crdsonnet/github-actions-libsonnet/main.libsonnet',
     installTemplate: '\n## Install\n\n```\njb install %(url)s@%(version)s\n```\n',
     name: 'github-actions-libsonnet',
     url: 'github.com/crdsonnet/github-actions-libsonnet',
-    usageTemplate: "\n## Usage\n\n```jsonnet\nlocal ga = import '%(import)s';\n\nlocal exampleWorkflow =\n  ga.workflow.withName('example workflow')\n  + ga.workflow.on.pull_request.withBranches(['main'])\n  + ga.workflow.withJobs({\n    example:\n      ga.job.withRunsOn('ubuntu-latest')\n      + ga.job.withSteps(\n        ga.job.step.withName('Checkout')\n        + ga.job.step.withUses('actions/checkout@v4')\n      ),\n  });\n\nstd.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)\n\n```\n",
+    usageTemplate: "\n## Usage\n\n```jsonnet\nlocal ga = import '%(import)s';\n\nlocal exampleWorkflow =\n  ga.workflow.withName('example workflow')\n  + ga.workflow.on.pull_request.withBranches(['main'])\n  + ga.workflow.withJobs({\n    example:\n      ga.job.withRunsOn('ubuntu-latest')\n      + ga.job.withSteps([\n        ga.job.step.withName('Checkout')\n        + ga.job.step.withUses('actions/checkout@v4'),\n      ]),\n  });\n\nstd.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)\n\n```\n",
     version: 'main',
   },
   workflow+:
@@ -2653,5 +2653,24 @@
               },
             },
         },
+    },
+  actionInput+:
+    {
+      '#withDefault': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: "A string representing the default value. The default value is used when an input parameter isn't specified in a workflow file." } },
+      withDefault(value): {
+        default: value,
+      },
+      '#withDeprecationMessage': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'A string shown to users using the deprecated input.' } },
+      withDeprecationMessage(value): {
+        deprecationMessage: value,
+      },
+      '#withDescription': { 'function': { args: [{ default: null, enums: null, name: 'value', type: ['string'] }], help: 'A string description of the input parameter.' } },
+      withDescription(value): {
+        description: value,
+      },
+      '#withRequired': { 'function': { args: [{ default: true, enums: null, name: 'value', type: ['boolean'] }], help: 'A boolean to indicate whether the action requires the input parameter. Set to `true` when the parameter is required.' } },
+      withRequired(value=true): {
+        required: value,
+      },
     },
 }

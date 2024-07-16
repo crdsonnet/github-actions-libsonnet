@@ -4,6 +4,7 @@
 
 ## Subpackages
 
+* [input](input.md)
 * [runs.composite.step](runs/composite/step.md)
 
 ## Index

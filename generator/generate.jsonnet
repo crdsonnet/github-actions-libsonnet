@@ -88,12 +88,16 @@ local actionschema =
     },
   };
 
+local inputsschema =
+  actionschema.properties.inputs.patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
+
 local processor = crdsonnet.processor.new('ast');
 
 local asts = [
   crdsonnet.schema.render('workflow', schema, processor),
   crdsonnet.schema.render('job', jobschema, processor),
   crdsonnet.schema.render('action', actionschema, processor),
+  crdsonnet.schema.render('actionInput', inputsschema, processor),
 ];
 
 local docstring =
@@ -129,5 +133,3 @@ local docstring =
 + (
   autils.deepMergeObjects([docstring] + asts)
 ).toString()
-
-//processor.parse('workflow', schema)
