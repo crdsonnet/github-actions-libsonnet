@@ -31,5 +31,6 @@ std.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=fal
 
 ## Subpackages
 
+* [action](action/index.md)
 * [job](job/index.md)
 * [workflow](workflow.md)
