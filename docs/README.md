@@ -33,4 +33,5 @@ std.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=fal
 
 * [action](action/index.md)
 * [job](job/index.md)
+* [util](util.md)
 * [workflow](workflow.md)

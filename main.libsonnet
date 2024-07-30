@@ -1,5 +1,7 @@
 (import './raw.libsonnet')
 + {
+  util: import './util.libsonnet',
+
   job+: {
     // The generated code implements a singular 'step' to accomodate for a nicer library.
     // The withStep* functions below fix the side effects of this.
