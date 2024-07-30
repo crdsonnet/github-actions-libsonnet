@@ -121,6 +121,24 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
       handlesFields(fields, workflow)
       : 'Workflow contains fields that are not handled.';
 
+    local sortJobByNeeds(jobs) =
+      local getDepedencies(key) =
+        local job = jobs[key];
+        if 'needs' in job
+        then
+          if std.isArray(job.needs)
+          then std.join('', [
+            getDepedencies(dep) + dep
+            for dep in job.needs
+          ]) + key
+          else job.needs + key
+        else key;
+
+      std.sort(
+        std.objectFields(jobs),
+        getDepedencies
+      );
+
     std.join(
       '\n\n',
       manifestFields(
@@ -147,7 +165,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
           '\n\n',
           manifestFields(
             workflow.jobs,
-            std.objectFields(workflow.jobs),
+            sortJobByNeeds(workflow.jobs),
             '  '
           )
         ),
