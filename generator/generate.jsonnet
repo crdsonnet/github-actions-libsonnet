@@ -90,6 +90,8 @@ local actionschema =
 
 local inputsschema =
   actionschema.properties.inputs.patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
+local outputsschema =
+  actionschema.definitions['outputs-composite'].patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
 
 local processor = crdsonnet.processor.new('ast');
 
@@ -101,6 +103,12 @@ local asts = [
     a.field.new(
       a.id.new('action'),
       crdsonnet.schema.render('input', inputsschema, processor)
+    ),
+  ]),
+  a.object.new([
+    a.field.new(
+      a.id.new('action'),
+      crdsonnet.schema.render('output', outputsschema, processor)
     ),
   ]),
 ];
