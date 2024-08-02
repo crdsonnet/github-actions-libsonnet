@@ -4,32 +4,19 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
   '#':: d.package.newSub('util', ''),
 
   local indentDoc(doc, indent='') =
-    std.join(
-      '\n',
-      std.map(
-        function(line)
-          if line != ''
-          then indent + line
-          else line,
-        std.split(doc, '\n')
-      )
-    ),
-
-  local manifestField(obj, field, indent='') =
-    indentDoc(
-      if std.isArray(obj[field])
-      then
-        field
-        + ':\n'
-        + manifestArray(obj[field], indent, sep='\n\n')
-      else
-        std.manifestYamlDoc(
-          { [field]: obj[field] },
-          indent_array_in_object=true,
-          quote_keys=false
-        ),
-      indent,
-    ),
+    if indent == ''
+    then doc
+    else
+      std.join(
+        '\n',
+        std.map(
+          function(line)
+            if line != ''
+            then indent + line
+            else line,
+          std.split(doc, '\n')
+        )
+      ),
 
   local manifestArray(arr, indent='', sep='\n') =
     indentDoc(
@@ -48,6 +35,22 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
       indent,
     ),
 
+  local manifestField(obj, field, indent='') =
+    indentDoc(
+      if std.isArray(obj[field])
+      then
+        field
+        + ':\n'
+        + manifestArray(obj[field], indent, sep='\n\n')
+      else
+        std.manifestYamlDoc(
+          { [field]: obj[field] },
+          indent_array_in_object=true,
+          quote_keys=false
+        ),
+      indent,
+    ),
+
   local manifestFields(obj, fields, indent='', sep='\n') =
     std.join(
       sep,
@@ -56,6 +59,13 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         function(field) manifestField(obj, field, indent),
         fields,
       )
+    ),
+
+  local manifestSteps(steps, indent='') =
+    indentDoc(
+      'steps:\n'
+      + manifestArray(steps, indent, sep='\n\n'),
+      indent,
     ),
 
   local handlesFields(fields, obj) =
@@ -115,12 +125,13 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
           + manifestFields(
             action.runs,
             ['using'] + std.filter(
-              function(k) k != 'using',
+              function(key) !std.member(['using', 'steps'], key),
               std.objectFields(action.runs)
             ),
             '  ',
             '\n\n',
           ),
+          manifestSteps(action.runs.steps, '  '),
           manifestFields(action, ['branding']),
         ]
       ),
@@ -170,6 +181,34 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         getDepedencies
       );
 
+    local manifestJob(job, indent='') =
+      std.join('\n', [
+        manifestFields(
+          job,
+          ['id', 'name'] + std.filter(
+            function(k) !std.member(['id', 'name', 'steps'], k),
+            std.objectFields(job)
+          ),
+          indent,
+        ),
+        manifestSteps(job.steps, indent),
+      ]);
+
+    local manifestJobs(jobs) =
+      'jobs:\n'
+      + indentDoc(
+        std.join(
+          '\n\n',
+          [
+            job
+            + ':\n'
+            + manifestJob(jobs[job], '  ')
+            for job in sortJobByNeeds(jobs)
+          ]
+        ),
+        '  '
+      );
+
     std.stripChars(
       std.join(
         '\n\n',
@@ -194,13 +233,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
             ],
             sep='\n\n',
           ),
-          'jobs:\n'
-          + manifestFields(
-            workflow.jobs,
-            sortJobByNeeds(workflow.jobs),
-            '  ',
-            '\n\n',
-          ),
+          manifestJobs(workflow.jobs),
         ]
       ),
       '\n',
