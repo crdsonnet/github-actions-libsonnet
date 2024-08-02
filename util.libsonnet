@@ -37,17 +37,11 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
 
   local manifestField(obj, field, indent='') =
     indentDoc(
-      if std.isArray(obj[field])
-      then
-        field
-        + ':\n'
-        + manifestArray(obj[field], indent, sep='\n\n')
-      else
-        std.manifestYamlDoc(
-          { [field]: obj[field] },
-          indent_array_in_object=true,
-          quote_keys=false
-        ),
+      std.manifestYamlDoc(
+        { [field]: obj[field] },
+        indent_array_in_object=true,
+        quote_keys=false
+      ),
       indent,
     ),
 
@@ -222,7 +216,6 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
           ),
           // special case: std.manifestYamlDoc always quotes "on"
           'on:\n' + manifestField(workflow, 'on')[6:],
-
           manifestFields(
             workflow,
             [
