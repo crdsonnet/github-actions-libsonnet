@@ -3,25 +3,59 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
 {
   '#':: d.package.newSub('util', ''),
 
+  local indentDoc(doc, indent='') =
+    std.join(
+      '\n',
+      std.map(
+        function(line)
+          if line != ''
+          then indent + line
+          else line,
+        std.split(doc, '\n')
+      )
+    ),
+
   local manifestField(obj, field, indent='') =
-    indent
-    + std.join(
-      '\n' + indent,
-      std.split(
+    indentDoc(
+      if std.isArray(obj[field])
+      then
+        field
+        + ':\n'
+        + manifestArray(obj[field], indent, sep='\n\n')
+      else
         std.manifestYamlDoc(
           { [field]: obj[field] },
           indent_array_in_object=true,
           quote_keys=false
         ),
-        '\n',
-      )
+      indent,
     ),
 
-  local manifestFields(obj, fields, indent='') =
-    std.filterMap(
-      function(field) field in obj,
-      function(field) manifestField(obj, field, indent),
-      fields,
+  local manifestArray(arr, indent='', sep='\n') =
+    indentDoc(
+      std.join(sep, [
+        '-' +
+        indentDoc(
+          std.manifestYamlDoc(
+            item,
+            indent_array_in_object=true,
+            quote_keys=false
+          ),
+          '  '
+        )[1:]
+        for item in arr
+      ]),
+      indent,
+    ),
+
+  local manifestFields(obj, fields, indent='', sep='\n') =
+    std.join(
+      sep,
+      std.filterMap(
+        function(field) field in obj,
+        function(field) manifestField(obj, field, indent),
+        fields,
+      )
     ),
 
   local handlesFields(fields, obj) =
@@ -57,43 +91,40 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
       handlesFields(fields, action)
       : 'Action contains fields that are not handled.';
 
-    std.join(
-      '\n\n',
-      [
-        std.join(
-          '\n',
+    std.stripChars(
+      std.join(
+        '\n\n',
+        [
           manifestFields(
             action,
             [
               'name',
               'author',
               'description',
-            ]
-          )
-        ),
-      ]
-      + manifestFields(
-        action,
-        [
-          'inputs',
-          'outputs',
-        ]
-      )
-      + [
-        'runs:\n'
-        + std.join(
-          '\n\n',
+            ],
+          ),
           manifestFields(
+            action,
+            [
+              'inputs',
+              'outputs',
+            ],
+            sep='\n\n',
+          ),
+          'runs:\n'
+          + manifestFields(
             action.runs,
             ['using'] + std.filter(
               function(k) k != 'using',
               std.objectFields(action.runs)
             ),
-            '  '
-          )
-        ),
-      ]
-      + manifestFields(action, ['branding'])
+            '  ',
+            '\n\n',
+          ),
+          manifestFields(action, ['branding']),
+        ]
+      ),
+      '\n',
     ),
 
   '#manifestWorkflow':: d.func.new(
@@ -139,36 +170,39 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         getDepedencies
       );
 
-    std.join(
-      '\n\n',
-      manifestFields(
-        workflow,
+    std.stripChars(
+      std.join(
+        '\n\n',
         [
-          'name',
-          'run-name',
-        ]
-      )
-      // special case: std.manifestYamlDoc always quotes "on"
-      + ['on:\n' + manifestField(workflow, 'on')[6:]]
-      + manifestFields(
-        workflow,
-        [
-          'permissions',
-          'env',
-          'defaults',
-          'concurrency',
-        ]
-      )
-      + [
-        'jobs:\n'
-        + std.join(
-          '\n\n',
           manifestFields(
+            workflow,
+            [
+              'name',
+              'run-name',
+            ]
+          ),
+          // special case: std.manifestYamlDoc always quotes "on"
+          'on:\n' + manifestField(workflow, 'on')[6:],
+
+          manifestFields(
+            workflow,
+            [
+              'permissions',
+              'env',
+              'defaults',
+              'concurrency',
+            ],
+            sep='\n\n',
+          ),
+          'jobs:\n'
+          + manifestFields(
             workflow.jobs,
             sortJobByNeeds(workflow.jobs),
-            '  '
-          )
-        ),
-      ]
+            '  ',
+            '\n\n',
+          ),
+        ]
+      ),
+      '\n',
     ),
 }
