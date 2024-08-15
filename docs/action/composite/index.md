@@ -10,6 +10,7 @@ Configures the path to the composite action, and the application used to execute
 
 ## Index
 
+* [`fn new(name, description="defaults to the name")`](#fn-new)
 * [`fn withAuthor(value)`](#fn-withauthor)
 * [`fn withBranding(value)`](#fn-withbranding)
 * [`fn withBrandingMixin(value)`](#fn-withbrandingmixin)
@@ -30,6 +31,20 @@ Configures the path to the composite action, and the application used to execute
   * [`fn withUsing()`](#fn-runswithusing)
 
 ## Fields
+
+### fn new
+
+```jsonnet
+new(name, description="defaults to the name")
+```
+
+PARAMETERS:
+
+* **name** (`string`)
+* **description** (`string`)
+   - default value: `"defaults to the name"`
+
+`new` initializes a Composite action. Use `withSteps()` to add steps.
 
 ### fn withAuthor
 

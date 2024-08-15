@@ -9,6 +9,7 @@ Configures the path to the action's code and the application used to execute the
 
 ## Index
 
+* [`fn new(name, main, description="defaults to the name")`](#fn-new)
 * [`fn withAuthor(value)`](#fn-withauthor)
 * [`fn withBranding(value)`](#fn-withbranding)
 * [`fn withBrandingMixin(value)`](#fn-withbrandingmixin)
@@ -32,6 +33,21 @@ Configures the path to the action's code and the application used to execute the
   * [`fn withUsing(value)`](#fn-runswithusing)
 
 ## Fields
+
+### fn new
+
+```jsonnet
+new(name, main, description="defaults to the name")
+```
+
+PARAMETERS:
+
+* **name** (`string`)
+* **main** (`string`)
+* **description** (`string`)
+   - default value: `"defaults to the name"`
+
+`new` initializes a Javascript action.
 
 ### fn withAuthor
 

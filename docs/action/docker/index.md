@@ -9,6 +9,7 @@ Configures the image used for the Docker action.
 
 ## Index
 
+* [`fn new(name, image, description="defaults to the name")`](#fn-new)
 * [`fn withAuthor(value)`](#fn-withauthor)
 * [`fn withBranding(value)`](#fn-withbranding)
 * [`fn withBrandingMixin(value)`](#fn-withbrandingmixin)
@@ -39,6 +40,21 @@ Configures the image used for the Docker action.
     * [`fn withStringContainingExpressionSyntax(value)`](#fn-runsenvwithstringcontainingexpressionsyntax)
 
 ## Fields
+
+### fn new
+
+```jsonnet
+new(name, image, description="defaults to the name")
+```
+
+PARAMETERS:
+
+* **name** (`string`)
+* **image** (`string`)
+* **description** (`string`)
+   - default value: `"defaults to the name"`
+
+`new` initializes a Composite action.
 
 ### fn withAuthor
 
