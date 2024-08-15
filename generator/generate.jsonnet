@@ -5,6 +5,8 @@ local crdsonnet = import 'github.com/crdsonnet/crdsonnet/crdsonnet/main.libsonne
 local astRenderEngine = import 'github.com/crdsonnet/crdsonnet/crdsonnet/renderEngines/ast.libsonnet';
 local d = import 'github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
 
+local actionSchema = import 'github.com/SchemaStore/schemastore/src/schemas/json/github-action.json';
+
 local schema =
   (import 'github.com/SchemaStore/schemastore/src/schemas/json/github-workflow.json')
   + {
@@ -52,65 +54,139 @@ local schema =
   }
 ;
 
-local jobschema =
+local jobSchema =
   std.mergePatch(schema, { properties: null, required: null })
   + { '$ref': '#/definitions/normalJob' };
 
-local actionschema =
-  (import 'github.com/SchemaStore/schemastore/src/schemas/json/github-action.json')
+local actionCompositeSchema =
+  actionSchema
   + {
-    // rename refs for nicer output
-    definitions+: {
-      javascript: self['runs-javascript'],
-      composite: self['runs-composite'] + {
-        properties+: {
-          steps:: {},
-          local steps = super.steps,
-          step: steps,
-        },
-      },
-      docker: self['runs-docker'],
-    },
     properties+: {
-      runs: {
-        oneOf: [
-          {
-            '$ref': '#/definitions/javascript',
+      runs:
+        actionSchema.definitions['runs-composite']
+        + {
+          properties+: {
+            steps:: {},
+            local steps = super.steps,
+            step: steps,
           },
-          {
-            '$ref': '#/definitions/composite',
-          },
-          {
-            '$ref': '#/definitions/docker',
-          },
-        ],
-      },
+        },
+      outputs: actionSchema.definitions['outputs-composite'],
+    },
+  };
+local compositeOutputsSchema = actionSchema.definitions['outputs-composite'].patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
+
+local actionDockerSchema =
+  actionSchema
+  + {
+    properties+: {
+      runs: actionSchema.definitions['runs-docker'],
+      outputs: actionSchema.definitions.outputs,
     },
   };
 
-local inputsschema =
-  actionschema.properties.inputs.patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
-local outputsschema =
-  actionschema.definitions['outputs-composite'].patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
+local actionJavascriptSchema =
+  actionSchema
+  + {
+    properties+: {
+      runs: actionSchema.definitions['runs-javascript'],
+      outputs: actionSchema.definitions.outputs,
+    },
+  };
+
+
+local actionInputsSchema =
+  actionSchema.properties.inputs.patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
+local actionOutputsSchema =
+  actionSchema.definitions.outputs.patternProperties['^[_a-zA-Z][a-zA-Z0-9_-]*$'];
 
 local processor = crdsonnet.processor.new('ast');
 
+
+local subPackageDocstring(name, help='') =
+  a.object.new([
+    a.field.new(
+      a.string.new('#'),
+      a.literal.new(
+        std.manifestJsonEx(
+          d.package.newSub(name, help)
+          , '  ', ''
+        ),
+      ),
+    ),
+  ]);
+
+local mergeDocstring(name, obj, help='') =
+  autils.deepMergeObjects([
+    a.object.new([
+      a.field.new(
+        a.id.new(name),
+        subPackageDocstring(name, help)
+      ),
+    ]),
+    obj,
+  ]);
+
+local runsHelp(using) = actionSchema.definitions['runs-%s' % using].description;
+
+local forUsing(using, schema, inputsSchema, outputsSchema) =
+  mergeDocstring(
+    'action',
+    a.object.new([
+      a.field.new(
+        a.id.new('action'),
+        mergeDocstring(
+          using,
+          autils.deepMergeObjects([
+            crdsonnet.schema.render(using, schema, processor),
+            a.object.new([
+              a.field.new(
+                a.id.new(using),
+                mergeDocstring(
+                  'input',
+                  crdsonnet.schema.render('input', inputsSchema, processor),
+                )
+              ),
+            ]),
+            a.object.new([
+              a.field.new(
+                a.id.new(using),
+                mergeDocstring(
+                  'output',
+                  crdsonnet.schema.render('output', outputsSchema, processor),
+                )
+              ),
+            ]),
+          ]),
+          runsHelp(using),
+        ),
+      )
+      + a.field.withAdditive(),
+    ]),
+    'Upstream docs: ' + actionSchema['$comment'],
+  );
+
 local asts = [
   crdsonnet.schema.render('workflow', schema, processor),
-  crdsonnet.schema.render('job', jobschema, processor),
-  crdsonnet.schema.render('action', actionschema, processor),
-  a.object.new([
-    a.field.new(
-      a.id.new('action'),
-      crdsonnet.schema.render('input', inputsschema, processor)
-    ),
-  ]),
-  a.object.new([
-    a.field.new(
-      a.id.new('action'),
-      crdsonnet.schema.render('output', outputsschema, processor)
-    ),
-  ]),
+  crdsonnet.schema.render('job', jobSchema, processor),
+  forUsing(
+    'composite',
+    actionCompositeSchema,
+    actionInputsSchema,
+    compositeOutputsSchema
+  ),
+  forUsing(
+    'docker',
+    actionDockerSchema,
+    actionInputsSchema,
+    actionOutputsSchema
+  ),
+  forUsing(
+    'javascript',
+    actionJavascriptSchema,
+    actionInputsSchema,
+    actionOutputsSchema
+  ),
 ];
 
 local docstring =
@@ -155,8 +231,6 @@ local docstring =
 '// DO NOT EDIT: generated by generator/generate.jsonnet\n'
 + "{ workflow+: { '#': { help: '', name: 'workflow' } } }\n+ "
 + "{ job+: { '#': { help: '', name: 'job' } } }\n+ "
-+ "{ action+: { '#': { help: '', name: 'action' } } }\n+ "
-+ "{ action+: { input+: { '#': { help: '', name: 'action' } } } }\n+ "
 + (
   autils.deepMergeObjects([docstring] + asts)
 ).toString()

@@ -27,8 +27,8 @@
   },
 
   action+: {
-    runs+: {
-      composite+: {
+    composite+: {
+      runs+: {
         // The generated code implements a singular 'step' to accomodate for a nicer library.
         // The withStep* functions below fix the side effects of this.
         // This also ensures language server support works properly.
