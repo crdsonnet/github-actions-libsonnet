@@ -75,7 +75,6 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
               std.objectFields(step)
             )
             + ['env'],
-            indent,
           ),
       ),
       indent,
@@ -114,10 +113,16 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
       handlesFields(fields, action)
       : 'Action contains fields that are not handled.';
 
+    local pruneEmptyString(arr) =
+      std.filter(
+        function(s) s != '',
+        arr
+      );
+
     std.stripChars(
       std.join(
         '\n\n',
-        [
+        pruneEmptyString([
           manifestFields(
             action,
             [
@@ -146,7 +151,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
           ),
           manifestSteps(action.runs.steps, '  '),
           manifestFields(action, ['branding']),
-        ]
+        ])
       ),
       '\n',
     ),
