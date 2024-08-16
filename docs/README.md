@@ -1,6 +1,6 @@
 # github-actions-libsonnet
 
-Jsonnet library to create GitHub actions workflows.
+Jsonnet library to create workflows and actions for GitHub Actions.
 ## Install
 
 ```

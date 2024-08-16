@@ -1,4 +1,4 @@
-DEFAULT: raw.libsonnet
+DEFAULT: docs
 JSONNET_BIN ?= jsonnet
 
 jsonnetfile.json:

@@ -2,7 +2,7 @@
 {
   '#': {
     filename: 'main.libsonnet',
-    help: 'Jsonnet library to create GitHub actions workflows.\n## Install\n\n```\njb install github.com/crdsonnet/github-actions-libsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal ga = import "github.com/crdsonnet/github-actions-libsonnet/main.libsonnet"\n```\n',
+    help: 'Jsonnet library to create workflows and actions for GitHub Actions.\n## Install\n\n```\njb install github.com/crdsonnet/github-actions-libsonnet@main\n```\n\n## Usage\n\n```jsonnet\nlocal ga = import "github.com/crdsonnet/github-actions-libsonnet/main.libsonnet"\n```\n',
     'import': 'github.com/crdsonnet/github-actions-libsonnet/main.libsonnet',
     installTemplate: '\n## Install\n\n```\njb install %(url)s@%(version)s\n```\n',
     name: 'github-actions-libsonnet',
