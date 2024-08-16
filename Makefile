@@ -2,7 +2,7 @@ DEFAULT: raw.libsonnet
 JSONNET_BIN ?= jsonnet
 
 jsonnetfile.json:
-	jb init
+	jb init || true
 
 jsonnetfile.lock.json: jsonnetfile.json
 	jb install
@@ -29,8 +29,12 @@ docs: vendor raw.libsonnet main.libsonnet
 		-S -c -m docs \
 		-e '(import "github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet").render(import "main.libsonnet")'
 
-raw.libsonnet: generator vendor example.output.yaml generator
+raw.libsonnet: generator vendor examples generator
 	jsonnet -J generator/vendor -S generator/generate.jsonnet | jsonnetfmt - > raw.libsonnet
 
-example.output.yaml: example.jsonnet
-	jsonnet -S example.jsonnet > example.output.yaml
+EXAMPLES_SOURCES := $(wildcard examples/*.jsonnet)
+EXAMPLES_FILES := $(EXAMPLES_SOURCES:.jsonnet=.output.yaml)
+examples: $(EXAMPLES_FILES)
+
+examples/%.output.yaml: examples/%.jsonnet
+	jsonnet -S $< > $@

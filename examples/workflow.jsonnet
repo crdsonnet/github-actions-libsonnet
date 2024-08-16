@@ -1,4 +1,4 @@
-local ga = import './main.libsonnet';
+local ga = import '../main.libsonnet';
 
 local exampleWorkflow =
   ga.workflow.withName('example workflow')

@@ -1,0 +1,9 @@
+name: "example composite action"
+description: "example composite action"
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: "Checkout"
+      uses: "actions/checkout@v4"

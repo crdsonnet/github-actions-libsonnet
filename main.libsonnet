@@ -110,6 +110,5 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         + self.runs.withUsing()
         + self.runs.withImage(image),
     },
-
   },
 }
