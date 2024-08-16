@@ -89,6 +89,13 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
       )
     ),
 
+  local pruneEmptyString(arr) =
+    std.filter(
+      function(s) s != '',
+      arr
+    ),
+
+
   '#manifestAction':: d.func.new(
     |||
       `manifestAction` manifests an action in an opinionated Yaml format.
@@ -112,12 +119,6 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
     assert
       handlesFields(fields, action)
       : 'Action contains fields that are not handled.';
-
-    local pruneEmptyString(arr) =
-      std.filter(
-        function(s) s != '',
-        arr
-      );
 
     std.stripChars(
       std.join(
@@ -230,7 +231,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
     std.stripChars(
       std.join(
         '\n\n',
-        [
+        pruneEmptyString([
           manifestFields(
             workflow,
             [
@@ -251,7 +252,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
             sep='\n\n',
           ),
           manifestJobs(workflow.jobs),
-        ]
+        ])
       ),
       '\n',
     ),

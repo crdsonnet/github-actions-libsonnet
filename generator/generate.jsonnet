@@ -132,6 +132,19 @@ local docstring =
               './main.libsonnet',
               '%(import)s',
             )
+            + |||
+              ```
+
+              This can be rendered into a Yaml file like so:
+
+              ```console
+              jsonnet -S workflow.jsonnet
+              ```
+
+              The output will look like this:
+            |||
+            + '```yaml\n'
+            + std.rstripChars(importstr '../example.output.yaml', '\n')
           )
           , '  ', '\n'
         ),
