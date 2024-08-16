@@ -3,8 +3,6 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
 
 (import './raw.libsonnet')
 + {
-  util: import './util.libsonnet',
-
   workflow+: {
     '#new'::
       d.func.new(

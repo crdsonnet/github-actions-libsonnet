@@ -17,5 +17,4 @@ local ga = import "github.com/crdsonnet/github-actions-libsonnet/main.libsonnet"
 ## Subpackages
 
 * [action](action/index.md)
-* [util](util.md)
 * [workflow](workflow/index.md)

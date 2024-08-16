@@ -263,7 +263,7 @@ local docstring =
           d.package.new(
             'github-actions-libsonnet',
             'github.com/crdsonnet/github-actions-libsonnet',
-            'Jsonnet library to create GitHub actions workflows.',
+            'Jsonnet library to create workflows and actions for GitHub Actions.',
             'main.libsonnet',
             'main',
           )
