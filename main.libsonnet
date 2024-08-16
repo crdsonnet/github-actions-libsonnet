@@ -1,30 +1,48 @@
+local util = import './util.libsonnet';
 local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet';
 
 (import './raw.libsonnet')
 + {
   util: import './util.libsonnet',
 
-  job+: {
-    // The generated code implements a singular 'step' to accomodate for a nicer library.
-    // The withStep* functions below fix the side effects of this.
-    // This also ensures language server support works properly.
-    '#withStep':: {},
-    '#withSteps':: super['#withStep'],
-    withStep: self.withSteps,
-    withSteps(value): {
-      steps:
-        (if std.isArray(value)
-         then value
-         else [value]),
-    },
-    '#withStepMixin':: {},
-    '#withStepsMixin':: super['#withStepMixin'],
-    withStepMixin: self.withStepsMixin,
-    withStepsMixin(value): {
-      steps+:
-        (if std.isArray(value)
-         then value
-         else [value]),
+  workflow+: {
+    '#new'::
+      d.func.new(
+        |||
+          `new` initializes a Workflow.
+        |||,
+        args=[
+          d.arg('name', d.T.string),
+        ],
+      ),
+    new(name):
+      self.withName(name)
+      + self.withOn({})
+      + self.withJobs({})
+      + { manifest():: util.manifestWorkflow(self) },
+
+    job+: {
+      // The generated code implements a singular 'step' to accomodate for a nicer library.
+      // The withStep* functions below fix the side effects of this.
+      // This also ensures language server support works properly.
+      '#withStep':: {},
+      '#withSteps':: super['#withStep'],
+      withStep: self.withSteps,
+      withSteps(value): {
+        steps:
+          (if std.isArray(value)
+           then value
+           else [value]),
+      },
+      '#withStepMixin':: {},
+      '#withStepsMixin':: super['#withStepMixin'],
+      withStepMixin: self.withStepsMixin,
+      withStepsMixin(value): {
+        steps+:
+          (if std.isArray(value)
+           then value
+           else [value]),
+      },
     },
   },
 
@@ -44,7 +62,8 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         self.withName(name)
         + self.withDescription(description)
         + self.runs.withUsing()
-        + self.runs.withSteps([]),
+        + self.runs.withSteps([])
+        + { manifest():: util.manifestAction(self) },
 
       runs+: {
         // The generated code implements a singular 'step' to accomodate for a nicer library.
@@ -90,7 +109,8 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         self.withName(name)
         + self.withDescription(description)
         + self.runs.withUsing()
-        + self.runs.withMain(main),
+        + self.runs.withMain(main)
+        + { manifest():: util.manifestAction(self) },
     },
     docker+: {
       '#new'::
@@ -108,7 +128,8 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         self.withName(name)
         + self.withDescription(description)
         + self.runs.withUsing()
-        + self.runs.withImage(image),
+        + self.runs.withImage(image)
+        + { manifest():: util.manifestAction(self) },
     },
   },
 }

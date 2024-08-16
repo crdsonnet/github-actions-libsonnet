@@ -2,20 +2,21 @@
 
 ```jsonnet
 local ga = import 'github.com/crdsonnet/github-actions-libsonnet/main.libsonnet';
+local job = ga.workflow.job;
 
 local exampleWorkflow =
-  ga.workflow.withName('example workflow')
+  ga.workflow.new('example workflow')
   + ga.workflow.on.pull_request.withBranches(['main'])
   + ga.workflow.withJobs({
     example:
-      ga.job.withRunsOn('ubuntu-latest')
-      + ga.job.withSteps([
-        ga.job.step.withName('Checkout')
-        + ga.job.step.withUses('actions/checkout@v4'),
+      job.withRunsOn('ubuntu-latest')
+      + job.withSteps([
+        job.step.withName('Checkout')
+        + job.step.withUses('actions/checkout@v4'),
       ]),
   });
 
-ga.util.manifestWorkflow(exampleWorkflow)
+exampleWorkflow.manifest()
 
 ```
 
@@ -43,8 +44,13 @@ jobs:
 ```
 
 
+## Subpackages
+
+* [job](job/index.md)
+
 ## Index
 
+* [`fn new(name)`](#fn-new)
 * [`fn withConcurrency(value)`](#fn-withconcurrency)
 * [`fn withConcurrencyMixin(value)`](#fn-withconcurrencymixin)
 * [`fn withDefaults(value)`](#fn-withdefaults)
@@ -260,6 +266,18 @@ jobs:
   * [`fn withStatuses(value)`](#fn-permissionswithstatuses)
 
 ## Fields
+
+### fn new
+
+```jsonnet
+new(name)
+```
+
+PARAMETERS:
+
+* **name** (`string`)
+
+`new` initializes a Workflow.
 
 ### fn withConcurrency
 

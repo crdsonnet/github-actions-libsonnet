@@ -8,4 +8,4 @@ local exampleAction =
     + step.withUses('actions/checkout@v4'),
   ]);
 
-ga.util.manifestAction(exampleAction)
+exampleAction.manifest()
