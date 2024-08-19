@@ -29,7 +29,7 @@ docs: vendor raw.libsonnet main.libsonnet
 		-S -c -m docs \
 		-e '(import "github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet").render(import "main.libsonnet")'
 
-raw.libsonnet: generator vendor examples generator
+raw.libsonnet: generator vendor examples
 	jsonnet -J generator/vendor -S generator/generate.jsonnet | jsonnetfmt - > raw.libsonnet
 
 EXAMPLES_SOURCES := $(wildcard examples/*.jsonnet)
