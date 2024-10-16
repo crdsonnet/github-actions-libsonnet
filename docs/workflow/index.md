@@ -1,9 +1,56 @@
 # workflow
 
+```jsonnet
+local ga = import 'github.com/crdsonnet/github-actions-libsonnet/main.libsonnet';
+local job = ga.workflow.job;
 
+local exampleWorkflow =
+  ga.workflow.new('example workflow')
+  + ga.workflow.on.pull_request.withBranches(['main'])
+  + ga.workflow.withJobs({
+    example:
+      job.withRunsOn('ubuntu-latest')
+      + job.withSteps([
+        job.step.withName('Checkout')
+        + job.step.withUses('actions/checkout@v4'),
+      ]),
+  });
+
+exampleWorkflow.manifest()
+
+```
+
+This can be rendered into a Yaml file like so:
+
+```console
+jsonnet -S workflow.jsonnet
+```
+
+The output will look like this:
+```yaml
+name: "example workflow"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  example:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
+```
+
+
+## Subpackages
+
+* [job](job/index.md)
 
 ## Index
 
+* [`fn new(name)`](#fn-new)
 * [`fn withConcurrency(value)`](#fn-withconcurrency)
 * [`fn withConcurrencyMixin(value)`](#fn-withconcurrencymixin)
 * [`fn withDefaults(value)`](#fn-withdefaults)
@@ -219,6 +266,18 @@
   * [`fn withStatuses(value)`](#fn-permissionswithstatuses)
 
 ## Fields
+
+### fn new
+
+```jsonnet
+new(name)
+```
+
+PARAMETERS:
+
+* **name** (`string`)
+
+`new` initializes a Workflow.
 
 ### fn withConcurrency
 
