@@ -24,8 +24,30 @@ local exampleWorkflow =
       ]),
   });
 
-std.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)
+ga.util.manifestWorkflow(exampleWorkflow)
+```
 
+This can be rendered into a Yaml file like so:
+
+```console
+jsonnet -S workflow.jsonnet
+```
+
+The output will look like this:
+```yaml
+name: "example workflow"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  example:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
 ```
 
 

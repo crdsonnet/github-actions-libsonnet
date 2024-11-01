@@ -18,17 +18,20 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         )
       ),
 
-  local manifestArray(arr, indent='', sep='\n') =
+  local plainManifest(doc) =
+    std.manifestYamlDoc(
+      doc,
+      indent_array_in_object=true,
+      quote_keys=false
+    ),
+
+  local manifestArray(arr, indent='', sep='\n', manifestF=plainManifest) =
     indentDoc(
       std.join(sep, [
         '-' +
         indentDoc(
-          std.manifestYamlDoc(
-            item,
-            indent_array_in_object=true,
-            quote_keys=false
-          ),
-          '  '
+          manifestF(item),
+          '  ',
         )[1:]
         for item in arr
       ]),
@@ -58,7 +61,22 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
   local manifestSteps(steps, indent='') =
     indentDoc(
       'steps:\n'
-      + manifestArray(steps, indent, sep='\n\n'),
+      + manifestArray(
+        steps,
+        indent,
+        sep='\n\n',
+        manifestF=
+        function(step)
+          manifestFields(
+            step,
+            ['name', 'id', 'if']
+            + std.filter(
+              function(key) !std.member(['name', 'id', 'if', 'env'], key),
+              std.objectFields(step)
+            )
+            + ['env'],
+          ),
+      ),
       indent,
     ),
 
@@ -70,6 +88,13 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
         std.objectFields(obj)
       )
     ),
+
+  local pruneEmptyString(arr) =
+    std.filter(
+      function(s) s != '',
+      arr
+    ),
+
 
   '#manifestAction':: d.func.new(
     |||
@@ -98,7 +123,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
     std.stripChars(
       std.join(
         '\n\n',
-        [
+        pruneEmptyString([
           manifestFields(
             action,
             [
@@ -127,7 +152,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
           ),
           manifestSteps(action.runs.steps, '  '),
           manifestFields(action, ['branding']),
-        ]
+        ])
       ),
       '\n',
     ),
@@ -206,7 +231,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
     std.stripChars(
       std.join(
         '\n\n',
-        [
+        pruneEmptyString([
           manifestFields(
             workflow,
             [
@@ -227,7 +252,7 @@ local d = import './vendor/github.com/jsonnet-libs/docsonnet/doc-util/main.libso
             sep='\n\n',
           ),
           manifestJobs(workflow.jobs),
-        ]
+        ])
       ),
       '\n',
     ),

@@ -12,4 +12,4 @@ local exampleWorkflow =
       ]),
   });
 
-std.manifestYamlDoc(exampleWorkflow, indent_array_in_object=true, quote_keys=false)
+ga.util.manifestWorkflow(exampleWorkflow)
